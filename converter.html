@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type= "text/css" href="converter.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </head> 
+    <body>
+        <div id="wrapper">
+            <svg id="SVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#273036" fill-opacity="0.91" d="M0,288L1440,224L1440,0L0,0Z"></path>
+            </svg>
+            <div class="myDivs" id="first">
+                <div>
+                    <h1 class="title">Unit converter</h1>
+                    <form action="/action_page.php">
+                        <label class="subTitle" for="units">Choose a Unit to convert</label>
+                        <br>
+                        <select name="unit" id="units1">
+                            <option id="Kglb" value="Kglb">Kilogram (Kg) to Pounds (lb)</option>
+                            <option id="KmMi" value="KmMi">Kilometer (Km) to Miles (mi)</option>
+                            <option id="mFt" value="mFt">Meter (m) to foot (ft)</option>
+                            <option id="CmIn" value="CmIn">Centimeter (cm) to inch (in)</option>
+                            <option id="cF" value="cF">Celcius (C) to Farheineit (F) </option>
+                            <option id="lGal" value="lGal">Liters (l) to Galon (gal)</option>
+                            <option id="mlOz" value="mlOz">mililiters (ml) to Ounces (oz)</option>
+                            
+                        </select>
+                        <img id="reverse1" class="reverse" src="reverse_black.png" alt="reverse sign">
+                </div>
+                <div id="errorMessage">
+                    <h6 class="errorText" style="color: brown;">Please enter a value!</h6>
+                </div>
+                <div id="lengthError1">
+                    <h6 style="color: brown;">Please, enter a smaller value</h6>
+                </div>
+                <div class="InputGroup" id="InputGroup1">
+                    <input id="submit1" type="number" placeholder="Type here"></input>
+                    <h6 id="Abr1">kg</h6>
+                    <button class="convertBtn" id="convert1" type="button">Convert to</button>
+                    <h4 id="result1"></h4>
+                    <h6 id="Abr2">lb</h6>
+                </div>
+                <button id="reset1" type="button" class="btn btn-light">Reset</button>
+            </div>
+            <div class="myDivs" id="second">
+                <div>
+                    <h1 class="title">Unit converter</h1>
+                    <form action="/action_page.php">
+                        <label class="subTitle" for="units">Choose a Unit to convert</label>
+                        <br>
+                        <select name="units" id="units2">
+                            <option id="lbKg" value="lbKg">Pounds(lb) to Kilogram(Kg) </option>
+                            <option id="miKm" value="miKm">Miles (mi) to Kilometer(Km)</option>
+                            <option id="ftM" value="ftM">foot (ft) to Meter (m) </option>
+                            <option id="inCm" value="inCm">inch (in) to Centimeter (cm)</option>
+                            <option id="fC" value="fC">Farheineit (F) to Celcius (C)   </option>
+                            <option id="galL" value="galL"> Galon (gal) to Liters (l) </option>
+                            <option id="ozMl" value="ozMl"> Ounces (oz) to mililiters (ml)</option>
+                        </select>
+                        <img id="reverse2" class="reverse" src="reverse_black.png"  alt="reverse sign">
+                </div>
+                <div id="errorMessage_2">
+                    <h6 class="errorText" style="color: brown;">Please enter a value!</h6>
+                </div>
+                <div id="lengthError2">
+                    <h6 style="color: brown;">Please, enter a smaller value</h6>
+                </div>
+                <div class="InputGroup"  id="InputGroup2">
+                    <input id="submit2" type="number" placeholder="Type here"></input>
+                    <h6 id="Abr3">lb</h6>
+                    <button class="convertBtn" id="convert2" type="button">Convert to</button>
+                    <h4 id="result2"></h4>
+                    <h6 id="Abr4">kg</h6>
+                </div>
+                <button id="reset2" type="button" class="btn btn-light">Reset</button>
+            </div>
+    </div>
+        
+    <!-- JAVASCRIPT -->
+        <Script>
+            var firstDiv = document.getElementById("first")
+            var secondDiv = document.getElementById("second")
+            var reverseBtn = document.getElementById("reverse1")
+            var reverseBtn_2 = document.getElementById("reverse2")
+
+            // FIRST
+            var Kglb= document.getElementById("Kglb")
+            var KmMi= document.getElementById("KmMi")
+            var mFt= document.getElementById("mFt")
+            var CmIn= document.getElementById("CmIn")
+            var cF= document.getElementById("cF")
+            var lGal= document.getElementById("lGal")
+            var mlOz= document.getElementById("mlOz")
+            //SECOND
+            var lbKg= document.getElementById("lbKg")
+            var miKm= document.getElementById("miKm")
+            var ftM= document.getElementById("ftM")
+            var inCm= document.getElementById("inCm")
+            var fC= document.getElementById("fC")
+            var galL= document.getElementById("galL")
+            var ozMl= document.getElementById("ozMl")
+
+            var submitFirst = document.getElementById("submit1")
+            var submitSecond = document.getElementById("submit2")
+            var resultFirst = document.getElementById("result1")
+            var resultSecond = document.getElementById("result2")
+
+            // DROPDOWN
+            var firstValues = document.getElementById("units1")
+            var secondtValues = document.getElementById("units2")
+
+            var convert1 = document.getElementById("convert1")
+            var convert2 = document.getElementById("convert2")
+
+            var errorMessage = document.getElementById("errorMessage")
+            var errorMessage_2 = document.getElementById("errorMessage_2")
+            
+
+            var Abr1 = document.getElementById("Abr1")
+            var Abr2 = document.getElementById("Abr2")
+            var Abr3 = document.getElementById("Abr3")
+            var Abr4 = document.getElementById("Abr4")
+
+            var lastUnit1 = "kg"
+            var lastUnit2 = "lb"
+            var lastUnit3 = "lb"
+            var lastUnit4 = "kg"
+
+            var lengthError1 = document.getElementById("lengthError1")
+            var lengthError2 = document.getElementById("lengthError2")
+
+            var reset1 = document.getElementById("reset1")
+            var reset2 = document.getElementById("reset2")
+        
+
+// FIRST
+
+            firstValues.addEventListener("change", function(e){
+                var unit = firstValues.options[firstValues.selectedIndex].value;
+                if(unit=="Kglb"){
+                    errorMessage.style.display="none"
+                    Abr1.innerHTML = "kg"
+                    lastUnit1 = "kg"
+                    Abr2.innerHTML = "lb"
+                    lastUnit2 = "lb"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="KmMi"){
+                    errorMessage.style.display="none"
+                    Abr1.innerHTML = "km"
+                    lastUnit1 = "km"
+                    Abr2.innerHTML = "mi"
+                    lastUnit2 = "mi"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="mFt") {
+                    errorMessage.style.display="none"
+                    Abr1.innerHTML = "m"
+                    lastUnit1 = "m"
+                    Abr2.innerHTML = "ft"
+                    lastUnit2 = "ft"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="CmIn") {
+                    errorMessage.style.display="none"
+                    Abr1.innerHTML = "cm"
+                    lastUnit1 = "cm"
+                    Abr2.innerHTML = "in"
+                    lastUnit2 = "in"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="cF") {
+                    errorMessage.style.display="none"
+                    Abr1.innerHTML = "°C"
+                    lastUnit1 = "°C"
+                    Abr2.innerHTML = "°F"
+                    lastUnit2 = "°F"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="lGal") {
+                    errorMessage.style.display="none"
+                    Abr1.innerHTML = "L"
+                    lastUnit1 = "L"
+                    Abr2.innerHTML = "Gal"
+                    lastUnit2 = "Gal"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="mlOz") {
+                    errorMessage.style.display="none"
+                    Abr1.innerHTML = "ml"
+                    lastUnit1 = "ml"
+                    Abr2.innerHTML = "oz"
+                    lastUnit2 = "oz"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+            })
+
+// SECOND
+
+            secondtValues.addEventListener("change", function(e){
+                var unit = secondtValues.options[secondtValues.selectedIndex].value;
+                if(unit=="lbKg") {
+                    errorMessage_2.style.display="none"
+                    Abr3.innerHTML = "lb"
+                    lastUnit3 = "lb"
+                    Abr4.innerHTML = "kg"
+                    lastUnit4 = "kg"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="miKm") {
+                    errorMessage_2.style.display="none"
+                    Abr3.innerHTML = "mi"
+                    lastUnit3 = "mi"
+                    Abr4.innerHTML = "km"
+                    lastUnit4 = "km"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="ftM") {
+                    errorMessage_2.style.display="none"
+                    Abr3.innerHTML = "ft"
+                    lastUnit3 = "mi"
+                    Abr4.innerHTML = "m"
+                    lastUnit4 = "m"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+        
+                }
+                else if(unit=="inCm") {
+                    errorMessage_2.style.display="none"
+                    Abr3.innerHTML = "in"
+                    lastUnit3 = "in"
+                    Abr4.innerHTML = "cm"
+                    lastUnit4 = "cm"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+        
+                }
+                else if(unit=="fC") {
+                    errorMessage_2.style.display="none"
+                    Abr3.innerHTML = "°F"
+                    lastUnit3 = "°F"
+                    Abr4.innerHTML = "°C"
+                    lastUnit4 = "°C"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+                
+                }
+                else if(unit=="galL") {
+                    errorMessage_2.style.display="none"
+                    Abr3.innerHTML = "Gal"
+                    lastUnit3 = "Gal"
+                    Abr4.innerHTML = "L"
+                    lastUnit4 = "L"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+                    
+                }
+                else if(unit=="ozMl") {
+                    errorMessage_2.style.display="none"
+                    Abr3.innerHTML = "oz"
+                    lastUnit3 = "oz"
+                    Abr4.innerHTML = "ml"
+                    lastUnit4 = "ml"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+                }
+            })
+
+
+
+            reverseBtn.addEventListener("click", function(e){
+                errorMessage.style.display="none"
+                Abr1.innerHTML = lastUnit1
+                Abr2.innerHTML = lastUnit2
+                submitFirst.value = ""
+                resultFirst.innerHTML = ""
+                firstDiv.style.display= "none"
+                secondDiv.style.display= "inline-block"
+
+
+            })
+
+            reverseBtn_2.addEventListener("click", function(e){
+                Abr3.innerHTML = lastUnit3
+                Abr4.innerHTML = lastUnit4
+                submitSecond.value = ""
+                resultSecond.innerHTML = ""
+                errorMessage_2.style.display="none"
+                secondDiv.style.display= "none"
+                firstDiv.style.display="inline-block"
+
+                    
+            })
+
+            convert1.addEventListener("click", function(e){
+                var unit = firstValues.options[firstValues.selectedIndex].value;
+                if(submitFirst.value == ""){
+                    Abr1.innerHTML = lastUnit1
+                    Abr2.innerHTML = lastUnit2
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="inline-block"
+                    errorMessage.style.marginLeft="8rem"
+                    errorMessage.style.marginTop="1rem"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+
+                else if((submitFirst.value).length>8){
+                    Abr1.innerHTML = lastUnit1
+                    Abr2.innerHTML = lastUnit2
+                    lengthError1.style.display="inline-block"
+                    lengthError1.style.marginLeft="9rem"
+                    lengthError1.style.marginTop="1rem"
+                    resultFirst.style.display="inline-block"
+                    Abr1.style.display="inline-block"
+                    Abr2.style.display="inline-block"
+                }
+                
+                else if(unit=="Kglb") { 
+                    
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="none"
+                    lengthError1.style.display="none"
+                    var result=convertTolb(submitFirst.value)
+                    resultFirst.innerHTML=result
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="KmMi") {
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="none"
+                    lengthError1.style.display="none"
+                    var result=convertToMi(submitFirst.value)
+                    resultFirst.innerHTML=result
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="mFt") {
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="none"
+                    lengthError1.style.display="none"
+                    var result=convertToFt(submitFirst.value)
+                    resultFirst.innerHTML=result
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="CmIn") {
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="none"
+                    lengthError1.style.display="none"
+                    var result=convertToIn(submitFirst.value)
+                    resultFirst.innerHTML=result
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="cF") {
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="none"
+                    lengthError1.style.display="none"
+                    var result=convertToF(submitFirst.value)
+                    resultFirst.innerHTML=result
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="lGal") {
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="none"
+                    lengthError1.style.display="none"
+                    var result=convertToGal(submitFirst.value)
+                    resultFirst.innerHTML=result
+                    Abr2.style.display="inline-block"
+                }
+                else if(unit=="mlOz") {
+                    resultFirst.style.display="inline-block"
+                    errorMessage.style.display="none"
+                    lengthError1.style.display="none"
+                    var result=convertToOz(submitFirst.value)
+                    resultFirst.innerHTML=result
+                    Abr2.style.display="inline-block"
+                }
+            })
+// HERE
+            convert2.addEventListener("click", function(e){
+                var unit = secondtValues.options[secondtValues.selectedIndex].value;
+                if(submitSecond.value == ""){
+                    Abr3.innerHTML = lastUnit3
+                    Abr4.innerHTML = lastUnit4
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="inline-block"
+                    errorMessage_2.style.marginLeft="7rem"
+                    errorMessage_2.style.marginTop="1rem"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+                }
+                else if((submitFirst.value).length>8){
+                    Abr3.innerHTML = lastUnit1
+                    Abr4.innerHTML = lastUnit2
+                    lengthError2.style.display="inline-block"
+                    lengthError2.style.marginLeft="8rem"
+                    lengthError2.style.marginTop="1rem"
+                    resultSecond.style.display="inline-block"
+                    Abr3.style.display="inline-block"
+                    Abr4.style.display="inline-block"
+                }
+                
+                else if(unit=="lbKg") { 
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="none"
+                    lengthError2.style.display="none"
+                    var result=convertToKg(submitSecond.value)
+                    resultSecond.innerHTML=result
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="miKm") {
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="none"
+                    lengthError2.style.display="none"
+                    var result=convertToKm(submitSecond.value)
+                    resultSecond.innerHTML=result
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="ftM") {
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="none"
+                    lengthError2.style.display="none"
+                    var result=convertToM(submitSecond.value)
+                    resultSecond.innerHTML=result
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="inCm") {
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="none"
+                    lengthError2.style.display="none"
+                    var result=convertToCm(submitSecond.value)
+                    resultSecond.innerHTML=result
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="fC") {
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="none"
+                    lengthError2.style.display="none"
+                    var result=convertToC(submitSecond.value)
+                    resultSecond.innerHTML=result
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="galL") {
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="none"
+                    lengthError2.style.display="none"
+                    var result=convertToL(submitSecond.value)
+                    resultSecond.innerHTML=result
+                    Abr4.style.display="inline-block"
+                }
+                else if(unit=="ozMl") {
+                    resultSecond.style.display="inline-block"
+                    errorMessage_2.style.display="none"
+                    lengthError2.style.display="none"
+                    var result=convertToMl(submitSecond.value)
+                    resultSecond.innerHTML=result
+                    Abr4.style.display="inline-block"
+                }
+            })
+
+            function convertTolb(valueInKg){
+                var finalresult= (parseFloat(valueInKg) *2.20462).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToKg(valueInlb){
+                var finalresult= (parseFloat(valueInlb)*0.45359237).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToMi(valueInKm){
+                var finalresult= (parseFloat(valueInKm)*0.621371).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToKm(valueInMi){
+                var finalresult= (parseFloat(valueInMi)*1.60934 ).toFixed(4)
+                return finalresult;
+            }         
+            
+            function convertToFt(valueInM){
+                var finalresult=(parseFloat(valueInM)*3.28084 ).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToM(valueInFt){
+                var finalresult=(parseFloat(valueInFt)*0.3048 ).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToIn(valueInCm){
+                var finalresult= (parseFloat(valueInCm)*0.393701 ).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToCm(valueInIn){
+                var finalresult=(parseFloat(valueInIn)*2.54 ).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToC(valueInF){
+                var finalresult= (parseFloat(valueInF-32)/1.8).toFixed(4)
+                return finalresult;
+            }
+            function convertToF(valueInC){
+                var finalresult= (parseFloat(valueInC*1.8+32)).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToL(valueInGal){
+                var finalresult= (parseFloat(valueInGal*3.78541)).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToGal(valueInL){
+                var finalresult= (parseFloat(valueInL*0.264172)).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToMl(valueInOz){
+                var finalresult= (parseFloat(valueInOz*29.5735)).toFixed(4)
+                return finalresult;
+            }
+
+            function convertToOz(valueInMl){
+                var finalresult= (parseFloat(valueInMl*0.033814)).toFixed(4)
+                return finalresult;
+            }
+
+            reset1.addEventListener("click", function(e){
+            location.reload(); 
+        })
+            reset2.addEventListener("click", function(e){
+            location.reload(); 
+        })
+
+        </Script>
+    </body>
+</html>
